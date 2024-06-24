@@ -7,22 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "employer")
 public class Employer extends AbstractEntity {
-
-    @NotBlank(message = "Location is required")
-    @Size(min = 1, max = 100, message = "Location must be between 1 and 100 characters")
+    @NotBlank( message = " The message isn't blank")
+    @Size(min=3, max=15)
     private String location;
-
-    @OneToMany
-    @JoinColumn(name = "employer_id") // name of the foreign key column in the Job table
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name="employer_id")
     private List<Job> jobs = new ArrayList<>();
 
-    // No-argument constructor for Hibernate
-    public Employer() {
+    public Employer(){
+
     }
 
-    // Getter and Setter for location
     public String getLocation() {
         return location;
     }
@@ -31,7 +27,6 @@ public class Employer extends AbstractEntity {
         this.location = location;
     }
 
-    // Getter and Setter for jobs
     public List<Job> getJobs() {
         return jobs;
     }
